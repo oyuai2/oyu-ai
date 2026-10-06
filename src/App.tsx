@@ -55,6 +55,7 @@ import type {
   PublicOrnament,
   PublicResearch,
   ReportData,
+  ResearchTest,
 } from "./types";
 
 const ornaments = [
