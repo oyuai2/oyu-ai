@@ -1,0 +1,118 @@
+[
+  {
+    "code": "KM",
+    "name": "Қошқармүйіз",
+    "description": {
+      "kk": "Қошқардың иірілген мүйізіне ұқсайтын симметриялы иілім.",
+      "ru": "Симметричный завиток, напоминающий изогнутый рог барана.",
+      "en": "A symmetrical curl resembling a ram’s curved horn."
+    },
+    "culturalMeaning": {
+      "kk": "Тексерілген дереккөз әлі қосылмаған.",
+      "ru": "Проверенный источник пока не добавлен.",
+      "en": "A verified source has not been added yet."
+    },
+    "use": {
+      "kk": "Тексерілген дереккөз әлі қосылмаған.",
+      "ru": "Проверенный источник пока не добавлен.",
+      "en": "A verified source has not been added yet."
+    },
+    "sources": [
+      {
+        "title": "Қазақтың ұлттық қолөнері — оқу материалы",
+        "url": "https://special-edu.kz/TEXTBOOKS/1RAZDEL/book/8.9.1/files/basic-html/page72.html"
+      }
+    ],
+    "images": [
+      "images/ornaments/KM/km-reference.svg"
+    ],
+    "verified": true
+  },
+  {
+    "code": "TT",
+    "name": "Түйетабан",
+    "description": {
+      "kk": "Түйе табанының ізін еске түсіретін геометриялық пішін.",
+      "ru": "Геометрическая форма, напоминающая след верблюда.",
+      "en": "A geometric form resembling a camel footprint."
+    },
+    "culturalMeaning": {
+      "kk": "Тексерілген дереккөз әлі қосылмаған.",
+      "ru": "Проверенный источник пока не добавлен.",
+      "en": "A verified source has not been added yet."
+    },
+    "use": {
+      "kk": "Тексерілген дереккөз әлі қосылмаған.",
+      "ru": "Проверенный источник пока не добавлен.",
+      "en": "A verified source has not been added yet."
+    },
+    "sources": [
+      {
+        "title": "Қазақтың ұлттық қолөнері — оқу материалы",
+        "url": "https://special-edu.kz/TEXTBOOKS/1RAZDEL/book/8.9.1/files/basic-html/page72.html"
+      }
+    ],
+    "images": [
+      "images/ornaments/TT/tt-reference.svg"
+    ],
+    "verified": true
+  },
+  {
+    "code": "KK",
+    "name": "Құсқанат",
+    "description": {
+      "kk": "Құстың жайылған қанатына ұқсас ырғақты элемент.",
+      "ru": "Ритмичный элемент, похожий на раскрытое крыло птицы.",
+      "en": "A rhythmic element resembling an open bird wing."
+    },
+    "culturalMeaning": {
+      "kk": "Тексерілген дереккөз әлі қосылмаған.",
+      "ru": "Проверенный источник пока не добавлен.",
+      "en": "A verified source has not been added yet."
+    },
+    "use": {
+      "kk": "Тексерілген дереккөз әлі қосылмаған.",
+      "ru": "Проверенный источник пока не добавлен.",
+      "en": "A verified source has not been added yet."
+    },
+    "sources": [
+      {
+        "title": "Қазақтың ұлттық қолөнері — оқу материалы",
+        "url": "https://special-edu.kz/TEXTBOOKS/1RAZDEL/book/8.9.1/files/basic-html/page72.html"
+      }
+    ],
+    "images": [
+      "images/ornaments/KK/kk-reference.svg"
+    ],
+    "verified": true
+  },
+  {
+    "code": "SO",
+    "name": "Сыңарөкше",
+    "description": {
+      "kk": "Сыңарөкше — мүйіз элементінің бір тармағы өкше тәрізді қайқып келетін ою түрі.",
+      "ru": "Сыңарөкше — орнамент, в котором одна ветвь роговидного элемента изгибается подобно каблуку.",
+      "en": "Syngarokshe is an ornament in which one branch of a horn-like element bends in a heel-like form."
+    },
+    "culturalMeaning": {
+      "kk": "Тексерілген дереккөз әлі қосылмаған.",
+      "ru": "Проверенный источник пока не добавлен.",
+      "en": "A verified source has not been added yet."
+    },
+    "use": {
+      "kk": "Тексерілген дереккөз әлі қосылмаған.",
+      "ru": "Проверенный источник пока не добавлен.",
+      "en": "A verified source has not been added yet."
+    },
+    "sources": [
+      {
+        "title": "Сәндік-қолданбалы өнер және ұлттық ою-өрнек",
+        "url": "https://auezov.edu.kz/media/attachments/2026/02/27/3.pdf"
+      }
+    ],
+    "images": [
+      "images/ornaments/SO/so-reference.svg"
+    ],
+    "verified": true
+  }
+]
