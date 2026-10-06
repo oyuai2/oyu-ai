@@ -430,6 +430,25 @@ function Recognize({ lang }: { lang: Lang }) {
     label: string;
     probability: number;
   } | null>(null);
+  const [actualLabel, setActualLabel] = useState("");
+  const [savedMessage, setSavedMessage] = useState("");
+  const researchKey = "oyu-ai-live-research-tests";
+  const saveResearchTest = () => {
+    if (!prediction || !actualLabel) return;
+    const current: ResearchTest[] = JSON.parse(localStorage.getItem(researchKey) || "[]");
+    const classCount = current.filter((x) => x.actualLabel === actualLabel).length;
+    if (current.length >= 20 || classCount >= 5) {
+      setSavedMessage(lang === "kk" ? "Бұл ою бойынша 5 тест немесе жалпы 20 тест толып қалды." : lang === "ru" ? "Для этого орнамента уже 5 тестов или всего набрано 20 тестов." : "This ornament already has 5 tests or the 20-test total is complete.");
+      return;
+    }
+    const row: ResearchTest = {
+      id: crypto.randomUUID(), imageUrl: null, actualLabel, predictedLabel: prediction.label,
+      confidence: prediction.probability, createdAt: new Date().toISOString(), published: false,
+    };
+    localStorage.setItem(researchKey, JSON.stringify([...current, row]));
+    setSavedMessage(lang === "kk" ? `Зерттеуге қосылды: ${current.length + 1} / 20` : lang === "ru" ? `Добавлено в исследование: ${current.length + 1} / 20` : `Added to research: ${current.length + 1} / 20`);
+    setActualLabel("");
+  };
   const stop = () => {
     stream?.getTracks().forEach((x) => x.stop());
     setStream(null);
@@ -586,6 +605,8 @@ function Recognize({ lang }: { lang: Lang }) {
                 onChange={(e) => {
                   stop();
                   setPrediction(null);
+                  setActualLabel("");
+                  setSavedMessage("");
                   const f = e.target.files?.[0];
                   if (f) setImage(URL.createObjectURL(f));
                 }}
@@ -653,6 +674,23 @@ function Recognize({ lang }: { lang: Lang }) {
               <p className="mt-2 text-turquoise">
                 {(prediction.probability * 100).toFixed(1)}%
               </p>
+              <div className="mt-5 border-t border-white/10 pt-4">
+                <p className="mb-3 text-sm font-semibold text-slate-300">
+                  {lang === "kk" ? "Суреттегі оюдың дұрыс атауын таңдаңыз" : lang === "ru" ? "Выберите правильное название орнамента на изображении" : "Select the true ornament name in the image"}
+                </p>
+                <div className="grid grid-cols-2 gap-2">
+                  {ornaments.map((o) => (
+                    <button key={o.code} onClick={() => { setActualLabel(o.name); setSavedMessage(""); }}
+                      className={actualLabel === o.name ? "btn-primary !px-2 !py-2 text-sm" : "btn-secondary !px-2 !py-2 text-sm"}>
+                      {o.name}
+                    </button>
+                  ))}
+                </div>
+                <button className="btn-primary mt-3 w-full" disabled={!actualLabel} onClick={saveResearchTest}>
+                  <Save size={18} /> {lang === "kk" ? "Зерттеуге қосу" : lang === "ru" ? "Добавить в исследование" : "Add to research"}
+                </button>
+                {savedMessage && <p className="mt-3 text-sm text-gold">{savedMessage}</p>}
+              </div>
             </div>
           )}
           <p className="mt-4 text-sm leading-6 text-slate-400">

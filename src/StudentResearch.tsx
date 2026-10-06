@@ -18,14 +18,19 @@ export default function StudentResearch({ lang }: { lang: Lang }) {
   const [summary, setSummary] = useState<ResearchFile["summary"] | null>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    loadResearchTests()
-      .then((data) => {
-        setRows(data.tests || []);
-        setSummary(data.summary);
-      })
-      .finally(() => setLoading(false));
-  }, []);
+  const researchKey = "oyu-ai-live-research-tests";
+  const refreshRows = async () => {
+    const data = await loadResearchTests();
+    const localRows: ResearchTest[] = JSON.parse(localStorage.getItem(researchKey) || "[]");
+    setRows(localRows.length ? localRows : (data.tests || []));
+    setSummary(data.summary);
+    setLoading(false);
+  };
+  useEffect(() => { refreshRows(); }, []);
+  const resetResearch = () => {
+    localStorage.removeItem(researchKey);
+    setRows([]);
+  };
 
   const correct = rows.filter(
     (row) => row.actualLabel === row.predictedLabel,
@@ -141,9 +146,14 @@ export default function StudentResearch({ lang }: { lang: Lang }) {
       <div className="kicker">4 × 5 = 20 TEST</div>
       <div className="mt-2 flex flex-wrap items-center justify-between gap-4">
         <h1 className="section-title">{tx.title}</h1>
-        <span className="rounded-full border border-gold/30 bg-gold/10 px-4 py-2 text-sm font-bold text-gold">
-          {tx.inProgress}
-        </span>
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="rounded-full border border-gold/30 bg-gold/10 px-4 py-2 text-sm font-bold text-gold">
+            {rows.length >= 20 ? (lang === "kk" ? "Тәжірибе аяқталды" : lang === "ru" ? "Эксперимент завершён" : "Experiment complete") : tx.inProgress}
+          </span>
+          {rows.length > 0 && <button onClick={resetResearch} className="btn-secondary !px-3 !py-2 text-sm">
+            {lang === "kk" ? "Нәтижені тазалау" : lang === "ru" ? "Очистить результаты" : "Clear results"}
+          </button>}
+        </div>
       </div>
 
       <section className="mt-8 grid gap-4 lg:grid-cols-3">
@@ -212,13 +222,14 @@ export default function StudentResearch({ lang }: { lang: Lang }) {
                 <th className="p-4">№</th>
                 <th className="p-4">{tx.actual}</th>
                 <th className="p-4">{tx.predicted}</th>
+                <th className="p-4">{lang === "kk" ? "Сенімділік" : lang === "ru" ? "Уверенность" : "Confidence"}</th>
                 <th className="p-4">{tx.status}</th>
               </tr>
             </thead>
             <tbody>
               {loading ? (
                 <tr>
-                  <td className="p-5 text-slate-400" colSpan={4}>
+                  <td className="p-5 text-slate-400" colSpan={5}>
                     …
                   </td>
                 </tr>
@@ -230,6 +241,7 @@ export default function StudentResearch({ lang }: { lang: Lang }) {
                       <td className="p-4">{index + 1}</td>
                       <td className="p-4">{row.actualLabel}</td>
                       <td className="p-4">{row.predictedLabel}</td>
+                      <td className="p-4">{(row.confidence * 100).toFixed(1)}%</td>
                       <td
                         className={`p-4 font-bold ${isCorrect ? "text-turquoise" : "text-gold"}`}
                       >
